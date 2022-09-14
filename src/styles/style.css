@@ -1,0 +1,25 @@
+body {
+  background-color: green;
+  color: white;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+h2 {
+  color: white;
+  text-align: center;
+}
+
+.gameGrid {
+  display: flex;
+}
+
+.gameTile {
+  width: 200px;
+  height: 100px;
+  background-color: #0007;
+  margin: 20px;
+}
