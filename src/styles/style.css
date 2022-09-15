@@ -13,6 +13,11 @@ h2 {
   text-align: center;
 }
 
+button.shuffle {
+  display: block;
+  margin: 10px auto;
+}
+
 .gameGrid {
   display: flex;
 }
@@ -22,4 +27,22 @@ h2 {
   height: 100px;
   background-color: #0007;
   margin: 20px;
+}
+
+.cardWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  background-color: white;
+  color: black;
+  min-width: 100px;
+  min-height: 150px;
+  margin: 5px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: black;
+  text-align: center;
 }
