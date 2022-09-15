@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Card from "./Card";
+import Card from "../../Card";
 import { orderedDeck } from "../../../constants";
 import { shuffle } from "../../../utils/shuffle";
 const ShuffleCards = () => {

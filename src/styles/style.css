@@ -41,8 +41,13 @@ button.shuffle {
   min-width: 100px;
   min-height: 150px;
   margin: 5px;
+  padding: 5px;
   border-radius: 5px;
   border-style: solid;
   border-color: black;
-  text-align: center;
+  font-weight: bold;
+}
+
+p.cardTopLeft {
+  margin: 0;
 }
