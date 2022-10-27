@@ -1,17 +1,17 @@
 import React from "react";
-import { ReactComponent as Clubs } from "../assets/club.svg";
-import { ReactComponent as Spades } from "../assets/spade.svg";
-import { ReactComponent as Hearts } from "../assets/heart.svg";
-import { ReactComponent as Diamonds } from "../assets/diamond.svg";
+import club from "../assets/club.svg";
+import spade from "../assets/spade.svg";
+import heart from "../assets/heart.svg";
+import diamond from "../assets/diamond.svg";
 const Card = (props) => {
   let suit;
   props.value.suit === "H"
-    ? (suit = <Hearts />)
+    ? (suit = heart)
     : props.value.suit === "D"
-    ? (suit = <Diamonds />)
+    ? (suit = diamond)
     : props.value.suit === "C"
-    ? (suit = <Clubs />)
-    : (suit = <Spades />);
+    ? (suit = club)
+    : (suit = spade);
   let value;
   props.value.value === 14
     ? (value = "A")
@@ -22,20 +22,42 @@ const Card = (props) => {
     : props.value.value === 11
     ? (value = "J")
     : (value = props.value.value);
+  let cardColour;
+  props.value.suit === "H" || props.value.suit === "D"
+    ? (cardColour = "#ff0000")
+    : (cardColour = "#000000");
 
   return (
     <>
       <div className="card">
-        <p
-          className="cardTopLeft"
-          style={
-            props.value.suit === "H" || props.value.suit === "D"
-              ? { color: "#ff0000" }
-              : { color: "#000000" }
-          }
-        >
-          {value} {suit}
-        </p>
+        <div className="cardTopLeft" style={{ color: cardColour }}>
+          <div className="smallNumber">{value}</div>
+
+          <div
+            className="smallSuit"
+            style={{
+              backgroundImage: `url(${suit})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          ></div>
+        </div>
+        <div className="cardMiddle">
+          <img src={suit} alt="suit" />
+        </div>
+        <div className="cardBottomRight" style={{ color: cardColour }}>
+          <div
+            className="smallSuit"
+            style={{
+              backgroundImage: `url(${suit})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          ></div>{" "}
+          <div className="smallNumber">{value}</div>
+        </div>
       </div>
     </>
   );

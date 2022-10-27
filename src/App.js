@@ -4,7 +4,7 @@ import GameList from "./components/GameList";
 import "./styles/style.css";
 
 const App = () => {
-  const [gameActive, setGameActive] = useState(false);
+  const [gameActive, setGameActive] = useState(false); //is there a game active?
   const [gameFragment, setGameFragment] = useState();
 
   const selectGame = (game) => {
@@ -17,8 +17,9 @@ const App = () => {
       <header>
         <h1>Casino Games</h1>
       </header>
-      <div className="body">
-        {!gameActive && <GameList selectGame={selectGame} />}
+      <div className="body"> 
+      {/* If no game active show Gamelist, if game active show GameWindow */}
+        {!gameActive && <GameList selectGame={selectGame} />}  
         {gameActive && (
           <GameWindow selectGame={selectGame} gameFragment={gameFragment} />
         )}

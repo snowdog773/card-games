@@ -48,6 +48,21 @@ button.shuffle {
   font-weight: bold;
 }
 
-p.cardTopLeft {
+.cardTopLeft {
   margin: 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.smallSuit {
+  height: 16px;
+  width: 16px;
+
+  justify-self: center;
+  align-self: center;
+}
+
+.cardBottomRight {
+  display: flex;
+  justify-content: flex-end;
 }

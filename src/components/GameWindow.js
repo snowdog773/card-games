@@ -1,7 +1,13 @@
 import React from "react";
-import ShuffleCards from "./games/shuffle/ShuffleCards";
+import ShuffleCards from "./games/ShuffleCards";
+import HighLow from "./games/HighLow";
 const GameWindow = (props) => {
-  return <>{props.gameFragment === "shuffle" && <ShuffleCards />}</>;
+  return (
+    <>
+      {props.gameFragment === "Shuffle Deck" && <ShuffleCards />}
+      {props.gameFragment === "High or Low" && <HighLow />}
+    </>
+  );
 };
 
 export default GameWindow;
