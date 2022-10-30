@@ -1,0 +1,10 @@
+.gamePlay {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.handWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

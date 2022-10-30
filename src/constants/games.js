@@ -1,1 +1,1 @@
-export const games = ["Shuffle Deck", "High or Low"];
+export const games = ["Shuffle Deck", "High or Low", "21"];

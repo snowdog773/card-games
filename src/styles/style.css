@@ -1,6 +1,9 @@
 body {
-  background-color: green;
+  background-image: url("../assets/baize.png");
+  background-size: cover;
   color: white;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 h1 {
@@ -20,13 +23,19 @@ button.shuffle {
 
 .gameGrid {
   display: flex;
+  justify-content: center;
 }
 
 .gameTile {
   width: 200px;
-  height: 100px;
+  padding: 20px 0;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  cursor: pointer;
+
   background-color: #0007;
   margin: 20px;
+  text-align: center;
 }
 
 .cardWrapper {
