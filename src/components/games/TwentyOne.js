@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Card from "../Card";
+import CardBack from "../CardBack";
 import { orderedDeck } from "../../constants/index";
 import { shuffle } from "../../utils/shuffle";
 
@@ -31,6 +32,7 @@ const TwentyOne = () => {
   // ]);
   const [playerHand, setPlayerHand] = useState([]);
   const [aiHand, setAiHand] = useState([]);
+  const [displayHand, setDisplayHand] = useState([]);
   const [playerScore, setPlayerScore] = useState(0);
   const [aiScore, setAiScore] = useState(0);
 
@@ -75,6 +77,8 @@ const TwentyOne = () => {
   useMemo(() => {
     let aceCount = 0;
     let acesArray = [];
+    setDisplayHand([...aiHand].splice(0, 1));
+
     const aiScoreArray = aiHand.map((e) =>
       e.value === 14
         ? 11
@@ -162,12 +166,21 @@ const TwentyOne = () => {
             </div>
             <div className="handWrapper">
               <h3>Computer Hand</h3>
-              <p>Score {aiScore}</p>
-              <div className="cardWrapper">
-                {aiHand.map((e, index) => (
-                  <Card value={e} key={index} />
-                ))}
-              </div>
+              {aiTurn || playerBust ? <p>Score {aiScore}</p> : <p>Score ???</p>}
+              {aiTurn || playerBust ? (
+                <div className="cardWrapper">
+                  {aiHand.map((e, index) => (
+                    <Card value={e} key={index} />
+                  ))}
+                </div>
+              ) : (
+                <div className="cardWrapper">
+                  <CardBack />
+                  {displayHand.map((e, index) => (
+                    <Card value={e} key={index} />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
           <div className="buttonsMessages">

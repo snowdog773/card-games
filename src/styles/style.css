@@ -50,8 +50,8 @@ button.shuffle {
 .card {
   background-color: white;
   color: black;
-  min-width: 100px;
-  min-height: 150px;
+  min-width: 50px;
+  min-height: 75px;
   margin: 5px;
   padding: 5px;
   border-radius: 5px;
@@ -60,6 +60,27 @@ button.shuffle {
   font-weight: bold;
 }
 
+.cardBack {
+  background-color: #000;
+  color: #fff;
+  min-width: 50px;
+  min-height: 75px;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #fff;
+  font-weight: bold;
+  text-align: center;
+}
+
+.cardBack h4 {
+  font-size: 1.5rem;
+  margin: 20px 0 0 0;
+}
+.cardBack p {
+  margin: 0;
+}
 .cardTopLeft {
   margin: 0;
   display: flex;
