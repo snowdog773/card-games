@@ -11,9 +11,9 @@ const TwentyOne = () => {
   const [deck, setDeck] = useState(shuffle(orderedDeck));
   // const [deck, setDeck] = useState([
   //   { suit: "S", value: 14 },
-  //   { suit: "S", value: 14 },
-  //   { suit: "S", value: 14 },
-  //   { suit: "S", value: 14 },
+  //   { suit: "S", value: 13 },
+  //   { suit: "S", value: 13 },
+  //   { suit: "S", value: 13 },
   //   { suit: "S", value: 14 },
   //   { suit: "S", value: 14 },
   //   { suit: "S", value: 14 },
@@ -42,6 +42,8 @@ const TwentyOne = () => {
   const [playerBust, setPlayerBust] = useState(false);
   const [aiBust, setAiBust] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [playerBlackjack, setPlayerBlackjack] = useState(false);
+  const [aiBlackjack, setAiBlackjack] = useState(false);
 
   useMemo(() => {
     let aceCount = 0;
@@ -61,7 +63,7 @@ const TwentyOne = () => {
         acesArray.push(acesArray[i] - 10);
       }
     }
-    console.log(acesArray);
+
     const filteredAcesArray = acesArray.filter((e) => e < 22);
     filteredAcesArray.length > 0
       ? setPlayerScore(Math.max(...filteredAcesArray))
@@ -72,12 +74,14 @@ const TwentyOne = () => {
       setPlayerBust(false);
     }
     playerBust ? setPlayerTurn(false) : setPlayerTurn(true);
+    playerScore === 21 && [...playerHand].length === 2
+      ? setPlayerBlackjack(true)
+      : setPlayerBlackjack(false);
   }, [playerHand, playerScore, playerBust]);
 
   useMemo(() => {
     let aceCount = 0;
     let acesArray = [];
-    setDisplayHand([...aiHand].splice(0, 1));
 
     const aiScoreArray = aiHand.map((e) =>
       e.value === 14
@@ -93,12 +97,18 @@ const TwentyOne = () => {
         acesArray.push(acesArray[i] - 10);
       }
     }
-    console.log(acesArray);
+
     const filteredAcesArray = acesArray.filter((e) => e < 22);
     filteredAcesArray.length > 0
       ? setAiScore(Math.max(...filteredAcesArray))
       : setAiScore(Math.min(...acesArray));
-  }, [aiHand]);
+    const aiCopy = [...aiHand];
+    aiCopy.splice(0, 1);
+    setDisplayHand(aiCopy);
+    aiScore === 21 && [...aiHand].length === 2
+      ? setAiBlackjack(true)
+      : setAiBlackjack(false);
+  }, [aiHand, aiScore]);
 
   const initialiseGame = () => {
     setDeck([...shuffle(orderedDeck)]);
@@ -112,6 +122,8 @@ const TwentyOne = () => {
     setAiHand([deck[2], deck[3]]);
     setDeckPosition(4);
     setGameOver(false);
+    setAiBlackjack(false);
+    setPlayerBlackjack(false);
   };
 
   const playerTwist = () => {
@@ -212,7 +224,13 @@ const TwentyOne = () => {
             )}
             {gameOver && (
               <div>
-                {playerScore > aiScore ? (
+                {playerBlackjack && !aiBlackjack ? (
+                  <p>Player wins with Blackjack</p>
+                ) : aiBlackjack && !playerBlackjack ? (
+                  <p>Computer wins with Blackjack</p>
+                ) : aiBlackjack && playerBlackjack ? (
+                  <p>It's a draw, both have Blackjack</p>
+                ) : playerScore > aiScore ? (
                   <p>Player 1 wins</p>
                 ) : playerScore < aiScore ? (
                   <p>Computer wins</p>
