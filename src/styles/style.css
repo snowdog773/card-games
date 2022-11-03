@@ -1,14 +1,17 @@
 body {
   background-image: url("../assets/baize.png");
   background-size: cover;
-  color: white;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: #ddd;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
 h1 {
-  color: white;
+  background-color: #000;
+  margin: 0;
+  padding: 10px;
   text-align: center;
+  border-bottom: solid 2px #ddd;
 }
 
 h2 {

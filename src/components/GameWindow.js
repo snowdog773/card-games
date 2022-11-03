@@ -7,7 +7,7 @@ const GameWindow = (props) => {
     <>
       {props.gameFragment === "Shuffle Deck" && <ShuffleCards />}
       {props.gameFragment === "High or Low" && <HighLow />}
-      {props.gameFragment === "21" && <TwentyOne />}
+      {props.gameFragment === "Blackjack" && <TwentyOne />}
     </>
   );
 };

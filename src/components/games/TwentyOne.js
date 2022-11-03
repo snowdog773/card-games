@@ -121,39 +121,57 @@ const TwentyOne = () => {
   };
 
   useEffect(() => {
-    if (aiTurn) {
-      if (aiScore < 17 || aiScore < playerScore) {
-        setAiHand((aiHand) => [...aiHand, deck[deckPosition]]);
-        setDeckPosition((deckPosition) => deckPosition + 1);
-      } else if (aiScore > 21) {
-        setAiBust(true);
-      } else {
-        setGameOver(true);
+    const delay = setTimeout(() => {
+      if (aiTurn) {
+        if (aiScore < 17 || aiScore < playerScore) {
+          setAiHand((aiHand) => [...aiHand, deck[deckPosition]]);
+          setDeckPosition((deckPosition) => deckPosition + 1);
+        } else if (aiScore > 21) {
+          setAiBust(true);
+        } else {
+          setGameOver(true);
+        }
       }
-    }
+    }, 1000);
+    return () => clearTimeout(delay);
   }, [aiScore, aiTurn, deck, deckPosition, playerScore]);
 
-  function restartGame() {
-    // setDeck(shuffle(orderedDeck));
-    // setDeckPosition(4);
-    initialiseGame();
-  }
   return (
     <>
-      <h2>Welcome to 21</h2>
+      <h2>Blackjack</h2>
 
-      {!started && <button onClick={() => initialiseGame()}>Start Game</button>}
+      {!started && (
+        <button
+          className="twentyOneStartButton"
+          onClick={() => initialiseGame()}
+        >
+          Start Game
+        </button>
+      )}
       {started && (
-        <div className="gamePlay">
-          <div className="handWrapper">
-            <h3>Player Hand</h3>
-            <p>Score {playerScore}</p>
-            <div className="cardWrapper">
-              {playerHand.map((e, index) => (
-                <Card value={e} key={index} />
-              ))}
+        <div className="gameWrapper">
+          <div className="gamePlay">
+            <div className="handWrapper">
+              <h3>Player Hand</h3>
+              <p>Score {playerScore}</p>
+              <div className="cardWrapper">
+                {playerHand.map((e, index) => (
+                  <Card value={e} key={index} />
+                ))}
+              </div>
             </div>
-            {playerTurn && !playerBust && (
+            <div className="handWrapper">
+              <h3>Computer Hand</h3>
+              <p>Score {aiScore}</p>
+              <div className="cardWrapper">
+                {aiHand.map((e, index) => (
+                  <Card value={e} key={index} />
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="buttonsMessages">
+            {playerTurn && !playerBust && !aiBust && (
               <div className="playerButtons">
                 <button className="twistButton" onClick={() => playerTwist()}>
                   Twist
@@ -166,13 +184,17 @@ const TwentyOne = () => {
             {playerBust && (
               <div className="playerBust">
                 <h3> Player is BUST!!! Computer wins!!!</h3>
-                <button onClick={() => restartGame()}>Play again?</button>{" "}
+                <button onClick={() => initialiseGame()}>
+                  Play again?
+                </button>{" "}
               </div>
             )}
             {aiBust && (
               <div className="aiBust">
                 <h3>Computer is BUST!!! Player wins!!!</h3>
-                <button onClick={() => restartGame()}>Play again?</button>{" "}
+                <button onClick={() => initialiseGame()}>
+                  Play again?
+                </button>{" "}
               </div>
             )}
             {gameOver && (
@@ -184,18 +206,9 @@ const TwentyOne = () => {
                 ) : (
                   <p>It's a draw</p>
                 )}
-                <button onClick={() => restartGame()}>Play again?</button>{" "}
+                <button onClick={() => initialiseGame()}>Play again?</button>{" "}
               </div>
             )}
-          </div>
-          <div className="handWrapper">
-            <h3>Computer Hand</h3>
-            <p>Score {aiScore}</p>
-            <div className="cardWrapper">
-              {aiHand.map((e, index) => (
-                <Card value={e} key={index} />
-              ))}
-            </div>
           </div>
         </div>
       )}
